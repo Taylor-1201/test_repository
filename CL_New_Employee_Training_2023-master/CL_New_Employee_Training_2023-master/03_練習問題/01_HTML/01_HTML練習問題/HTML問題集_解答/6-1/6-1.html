@@ -1,0 +1,100 @@
+<html>
+
+<head>
+	<!-- htmlファイルと同じフォルダにあるjQuery.jsを読み込む -->
+	<script type="text/javascript" src="../common/jQuery.js"></script>
+	<!-- 文字コードをUTF-8に設定（文字化け防止） -->
+	<meta charset="UTF-8">
+	<!-- タイトル -->
+	<title>数字当てゲーム</title>
+
+	<style>
+    	/* ここにCSSを書く */
+
+		#top{
+			margin-bottom: 5%;
+		}
+
+		#history{
+			width: 50%;
+			height: 50%;
+			overflow-y: scroll;
+		}
+
+		#status{
+			margin-top: 5%;
+		}
+	</style>
+</head>
+
+<body>
+    <!-- ここに画面に表示する内容を書く -->
+	<div id="top">0~1000の間でランダムに生成された数字を当ててください。</div>
+	<label>入力された数字</label>
+	<div id="history">
+	</div>
+	
+	<div>
+		<label id="status">数字を入力してください。</label>
+		<br>
+		<input type="text"  id="text"/>
+		<button id="button">Go</button>
+	</div>
+	
+	
+	<script>
+	    // ここにJavaScriptを書く
+	    
+	    //0~1000ランダムな整数の乱数を生成
+	     
+	     let i= Math.floor(Math.random() * 1000) + 1;
+	     console.log(i);
+	     
+	   
+	       //フォーカスあてる
+	        $("input").focus();
+	        
+	        
+	    //ボタン押したら…
+	    $("#button").on("click",function(){
+	    
+	     $("input").focus();
+		    //宣言
+		     var noninput = $("#text").val();
+		      
+		     //GO押したらクリアになる
+	         $("#text").val("");
+	      
+		     console.log(noninput);
+		     
+		    //if文
+		    if (noninput == ""){
+			    $("#status").text("入力してください。");
+			    $("#status").css("color", "red"); 	
+	
+		   	}else if(isNaN(noninput)){
+		      	 $("#status").text("数字以外が入力されました。数字を入力してください。");
+		      	  $("#status").css("color", "red"); 
+	
+		   	}else{
+		      	 $("#status").text("数字を入力してください。");
+		      	       
+		      	        if(i<noninput){
+	                        $("#history").append("<div>"+noninput+"　大きいです。"+"</div>");
+	     
+	                    }else if(i>noninput){
+	                        $("#history").append("<div>"+noninput+"　小さいです。"+"</div>");
+	     
+	                     }else {
+	                        $("#history").append("<div>"+noninput+"　正解です！"+"</div>");
+	             
+	    
+	            }
+		     }
+		 });
+	
+	  
+	</script>
+</body>
+
+</html>
